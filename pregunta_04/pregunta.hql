@@ -44,7 +44,7 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 /*
     >>> Escriba su respuesta a partir de este punto <<<
 */
-SELECT explode(c5) AS letra FROM tbl0;
 INSERT OVERWRITE DIRECTORY 'output'
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
-SELECT DISTINCT letra FROM letra ORDER BY letra;
+SELECT DISTINCT letra FROM tbl0
+LATERAL VIEW explode(c5) adTable AS letra;

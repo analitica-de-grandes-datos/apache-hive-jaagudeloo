@@ -46,6 +46,6 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 */
 INSERT OVERWRITE DIRECTORY 'output'
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
-SELECT col_1, col_2, COUNT(col_2) FROM
-(SELECT YEAR(c4) col_1, letra col_2 FROM tbl0 LATERAL VIEW explode(c5) adTable AS letra) filtro
+SELECT col_1, col_2, col_3 FROM
+(SELECT year(c4) col_1, letra col_2, count(col_2) col_3 FROM tbl0 LATERAL VIEW explode(c5) adTable AS letra)
 GROUPBY col_1, col_2 ORDER BY col_1, col_2;

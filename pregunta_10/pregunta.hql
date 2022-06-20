@@ -32,6 +32,6 @@ LOAD DATA LOCAL INPATH 'data.tsv' INTO TABLE t0;
 INSERT OVERWRITE DIRECTORY 'output'
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 SELECT clave, count(clave)
-FROM SELECT(t0 LATERAL VIEW explode(c3) adTable AS clave, valor)
+FROM t0 LATERAL VIEW explode(c3) adTable AS clave, valor
 GROUP BY clave
 ORDER BY clave;

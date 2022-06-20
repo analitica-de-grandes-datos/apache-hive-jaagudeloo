@@ -48,4 +48,4 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 */
 INSERT OVERWRITE DIRECTORY 'output'
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
-SELECT c2, sum(valor) FROM tbl0 LATERAL VIEW explode adTable AS clave, valor GROUP BY c2;
+SELECT c2, sum(valor) FROM tbl0 LATERAL VIEW explode(c6) adTable AS clave, valor GROUP BY c2;

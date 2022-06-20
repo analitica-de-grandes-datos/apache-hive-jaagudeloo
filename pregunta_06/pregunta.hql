@@ -47,4 +47,4 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 */
 INSERT OVERWRITE DIRECTORY 'output'
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
-SELECT concat_ws(':', upper(collect_list(letra))) FROM tbl0 LATERAL VIEW explode(c5) adTable AS letra GROUP BY c1;
+SELECT concat_ws(':', collect_list(upper(letra))) FROM tbl0 LATERAL VIEW explode(c5) adTable AS letra GROUP BY c1;

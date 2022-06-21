@@ -1,21 +1,3 @@
-/*
-
-Pregunta
-===========================================================================
-
-Escriba una consulta que compute la cantidad de registros por letra de la 
-columna 2 y clave de la columna 3; esto es, por ejemplo, la cantidad de 
-registros en tienen la letra `a` en la columna 2 y la clave `aaa` en la 
-columna 3 es:
-
-    a    aaa    5
-
-Apache Hive se ejecutará en modo local (sin HDFS).
-
-Escriba el resultado a la carpeta `output` de directorio de trabajo.
-
-*/
-
 DROP TABLE IF EXISTS t0;
 CREATE TABLE t0 (
     c1 STRING,
@@ -34,8 +16,8 @@ LOAD DATA LOCAL INPATH 'data.tsv' INTO TABLE t0;
 */
 INSERT OVERWRITE DIRECTORY 'output'
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
-SELECT letra_1, letra_2, count(*) AS contador
+SELECT letra, letras, count(*) AS contador
 FROM t0
-LATERAL VIEW explode(c2) adTable_1 AS letra_1
-LATERAL VIEW explode(c3) adTable_2 AS letra_2, valor
-GROUP BY letra_1, letra_2;
+LATERAL VIEW explode(c2) adTable_1 AS letra
+LATERAL VIEW explode(c3) adTable_2 AS letras, valor
+GROUP BY letra, letras;

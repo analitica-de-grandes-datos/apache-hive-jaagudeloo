@@ -32,4 +32,8 @@ LOAD DATA LOCAL INPATH 'data.tsv' INTO TABLE t0;
 /*
     >>> Escriba su respuesta a partir de este punto <<<
 */
-
+INSERT OVERWRITE DIRECTORY 'output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT a, aaa, 5 FROM
+(SELECT collect_list(',', c2) col_1, collect_list(',', c2))
+SELECT concat_ws(':', collect_list(upper(letra))) FROM tbl0 LATERAL VIEW explode(c5) adTable AS letra GROUP BY c1;

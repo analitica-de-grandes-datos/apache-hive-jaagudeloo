@@ -30,4 +30,7 @@ LOAD DATA LOCAL INPATH 'data.tsv' INTO TABLE t0;
 */
 INSERT OVERWRITE DIRECTORY 'output'
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
-SELECT c1, count(collect_list(',', c2)), count(collect_list(',', c2)) FROM t0;
+SELECT c1, count(collect_list(',', letra_1)), count(collect_list(',', letra_2))
+FROM t0
+LATERAL VIEW explode(c2) adTable1 AS letra_1
+LATERAL VIEW explode(c3) adTable1 AS letra_2;

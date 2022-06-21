@@ -34,8 +34,8 @@ LOAD DATA LOCAL INPATH 'data.tsv' INTO TABLE t0;
 */
 INSERT OVERWRITE DIRECTORY 'output'
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
-SELECT a, aaa, 5 FROM
-(SELECT collect_list(',', c2) col_1, collect_list(',', c3) col_2 FROM t0
-LATERAL VIEW explode(c2) adTable AS letra_1
-LATERAL VIEW explode(c3) adTable AS letra_2)
-SELECT concat_ws(':', collect_list(upper(letra))) FROM tbl0 LATERAL VIEW explode(c5) adTable AS letra GROUP BY c1;
+SELECT letra_1, letra_2, count(*)
+FROM t0
+LATERAL VIEW explode(c2) adTable_1 AS letra_1
+LATERAL VIEW explode(c3) adTable_2 AS letra_2, valor
+GROUP BY letra_1, letra_2;

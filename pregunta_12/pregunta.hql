@@ -34,7 +34,7 @@ LOAD DATA LOCAL INPATH 'data.tsv' INTO TABLE t0;
 */
 INSERT OVERWRITE DIRECTORY 'output'
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
-SELECT letra_1, letra_2, count(*)
+SELECT letra_1, letra_2, count(*) AS contador
 FROM t0
 LATERAL VIEW explode(c2) adTable_1 AS letra_1
 LATERAL VIEW explode(c3) adTable_2 AS letra_2, valor
